@@ -67,4 +67,38 @@ public class BookRepositoryTest {
         assertEquals(Long.valueOf(0), bookRepository.countAll());
         assertEquals(0,bookRepository.findAll().size());
     }
+
+    @Test(expected = Exception.class)
+    public void createInvalidBook() {
+        Book book = new Book(
+                null,
+                "Are you willing to face the past?\nMadhav is an aspiring writer who gets stuck in a dead-end " +
+                        "corporate job that gives him no joy and no time to write his book. But there's more to him than " +
+                        "meets the eye. He has been hiding a secret all his life---which, if revealed, may shatter " +
+                        "his very existence.",
+                199F,
+                "9780143439936",
+                new Date(),
+                214,
+                "https://shuttershock.null/love_will_find_a_way.png",
+                Language.ENGLISH
+        );
+
+        bookRepository.create(book);
+    }
+
+    @Test(expected = Exception.class)
+    public void invokeInvalidFind() {
+        bookRepository.find(null);
+    }
+
+    @Test(expected = Exception.class)
+    public void invokeInvalidCreate() {
+        bookRepository.create(null);
+    }
+
+    @Test(expected = Exception.class)
+    public void invokeInvalidDelete() {
+        bookRepository.delete(null);
+    }
 }
